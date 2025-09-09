@@ -1,0 +1,10 @@
+kind: Route
+apiVersion: api.webmethods.io/beta
+metadata:
+  name: presale-emea-prod-int-imp
+  namespace: presale-emea-prod-int-openapi3-moh-smart-triage
+  version: '1.0'
+  tags: []
+spec:
+  default-endpoint:
+    $ref: default:Endpoint-5e9asg:1.0

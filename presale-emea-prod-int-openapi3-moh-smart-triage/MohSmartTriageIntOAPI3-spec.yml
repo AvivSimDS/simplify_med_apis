@@ -1,0 +1,163 @@
+openapi: 3.0.1
+info:
+  title: MohSmartTriage
+  description: API for initiating and continuing medical interviews
+  version: 1.0.0
+servers:
+  - url: >-
+      https://presalesemeaprod.int-aws-de.webmethods.io/integration/restv2/development/flb9ac057205e330b0878aa1/MohSmartTriage
+paths:
+  /interview:
+    post:
+      summary: Start a new interview
+      operationId: POST_interview_svc1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InterviewStartRequest'
+        required: true
+      responses:
+        '200':
+          description: Interview started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InterviewStartResponse'
+      security:
+        - _basicAuth: []
+      x-codegen-request-body-name: body
+  /interview/{apt}/symptoms:
+    post:
+      summary: Submit patient's initial symptom
+      operationId: POST_interview_symptoms_svc1
+      parameters:
+        - name: apt
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SymptomSubmissionRequest'
+        required: true
+      responses:
+        '200':
+          description: Follow-up question
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowUpQuestionResponse'
+        '409':
+          description: Symptoms already submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowUpQuestionResponse'
+      security:
+        - _basicAuth: []
+      x-codegen-request-body-name: body
+  /interview/{apt}/answers:
+    post:
+      summary: Submit patient's answer to a follow-up question
+      operationId: POST_interview_answers_svc1
+      parameters:
+        - name: apt
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswerSubmissionRequest'
+        required: true
+      responses:
+        '200':
+          description: Next follow-up question or diagnosis
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswerResponse'
+        '409':
+          description: Interview already concluded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswerResponse'
+      security:
+        - _basicAuth: []
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    InterviewStartRequest:
+      type: object
+      properties:
+        age:
+          type: integer
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+        hmo:
+          type: string
+          enum:
+            - כללית
+            - מכבי
+            - לאומית
+            - מאוחדת
+            - ללא
+    InterviewStartResponse:
+      type: object
+      properties:
+        APT:
+          type: string
+    SymptomSubmissionRequest:
+      type: object
+      properties:
+        Symptom:
+          type: string
+    FollowUpQuestionResponse:
+      type: object
+      properties:
+        question:
+          type: object
+          properties: {}
+        has_emergency_evidence:
+          type: boolean
+        should_stop:
+          type: boolean
+    AnswerSubmissionRequest:
+      type: object
+      properties:
+        QuestionID:
+          type: string
+        QuestionAnswerText:
+          type: string
+    AnswerResponse:
+      type: object
+      properties:
+        should_stop:
+          type: boolean
+        question:
+          type: object
+          properties: {}
+        has_emergency_evidence:
+          type: boolean
+        diagnoses:
+          type: array
+          items:
+            type: object
+            properties: {}
+        conclusion:
+          type: object
+          properties: {}
+  securitySchemes:
+    _basicAuth:
+      type: http
+      scheme: basic
+x-original-swagger-version: '2.0'

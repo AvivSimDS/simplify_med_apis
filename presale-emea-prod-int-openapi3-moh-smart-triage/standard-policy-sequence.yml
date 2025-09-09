@@ -1,0 +1,13 @@
+kind: PolicySequence
+apiVersion: api.webmethods.io/beta
+metadata:
+  name: standard-policy-sequence
+  namespace: presale-emea-prod-int-openapi3-moh-smart-triage
+  version: '1.0'
+  tags: []
+spec:
+  transport:
+    - $ref: presale-emea-prod-int-openapi3-moh-smart-triage:HTTPS:1.0
+  routing:
+    - $ref: >-
+        presale-emea-prod-int-openapi3-moh-smart-triage:presale-emea-prod-int-imp:1.0

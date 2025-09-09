@@ -1,0 +1,10 @@
+kind: Transport
+apiVersion: api.webmethods.io/beta
+metadata:
+  name: HTTPS
+  namespace: presale-emea-prod-int-openapi3-moh-smart-triage
+  version: '1.0'
+  tags: []
+spec:
+  protocol:
+    - https

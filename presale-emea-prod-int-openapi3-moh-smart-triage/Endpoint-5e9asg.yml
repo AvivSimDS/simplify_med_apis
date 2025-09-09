@@ -1,0 +1,11 @@
+kind: HTTPEndpoint
+apiVersion: api.webmethods.io/beta
+metadata:
+  name: Endpoint-5e9asg
+  namespace: default
+  version: '1.0'
+  tags: []
+spec:
+  method: CUSTOM
+  url: >-
+    https://presalesemeaprod.int-aws-de.webmethods.io/integration/restv2/development/flb9ac057205e330b0878aa1/MohSmartTriage
