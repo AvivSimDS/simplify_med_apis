@@ -11,3 +11,5 @@ spec:
   routing:
     - $ref: >-
         presale-emea-prod-int-openapi3-moh-smart-triage:presale-emea-prod-int-imp:1.0
+    - $ref: >-
+        presale-emea-prod-int-openapi3-moh-smart-triage:PRS_EMEA_PROD_INT_BASIC_AUTH:1.0

@@ -1,0 +1,11 @@
+kind: OutboundBasicAuth
+apiVersion: api.webmethods.io/beta
+metadata:
+  name: PRS_EMEA_PROD_INT_BASIC_AUTH
+  namespace: presale-emea-prod-int-openapi3-moh-smart-triage
+  version: '1.0'
+  tags: []
+spec:
+  use_custom_credentials:
+    username: aviv.simionovici@ibm.com
+    password: MeuhedetClal123!
